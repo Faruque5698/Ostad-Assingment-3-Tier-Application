@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 680" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #232f3e; }
+      .subtitle { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 13px; fill: #545b64; }
+      .box-label { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; }
+      .node-title { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #16191f; }
+      .node-text { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 11px; fill: #414750; }
+      .badge { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 10px; font-weight: bold; fill: #ffffff; }
+      .arrow-label { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 600; fill: #0073bb; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0073bb" />
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e8900" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#8c3ae2" />
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#545b64" />
+    </marker>
+    <filter id="shadow" x="-3%" y="-3%" width="106%" height="108%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1100" height="680" fill="#f8f9fa" rx="10"/>
+
+  <!-- Header -->
+  <text x="35" y="38" class="title">AWS 3-Tier Web Application Architecture</text>
+  <text x="35" y="58" class="subtitle">Custom VPC (10.0.0.0/16) | Region: ap-southeast-2 (Sydney) | Nginx Load Balancer | PostgreSQL Database</text>
+
+  <!-- AWS Cloud Boundary -->
+  <rect x="30" y="80" width="1040" height="575" rx="12" fill="#ffffff" stroke="#ff9900" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="45" y="68" width="130" height="24" rx="4" fill="#ff9900"/>
+  <text x="55" y="84" class="badge" font-size="11">☁️ AWS Cloud Region</text>
+  <text x="185" y="85" class="node-text" font-weight="bold">ap-southeast-2 (Sydney)</text>
+
+  <!-- Internet Users -->
+  <g transform="translate(480, 105)">
+    <rect x="-110" y="0" width="220" height="42" rx="8" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="0" y="24" text-anchor="middle" class="node-title" fill="#1a73e8">🌐 Internet Clients / Browsers</text>
+  </g>
+
+  <!-- IGW -->
+  <g transform="translate(480, 195)">
+    <rect x="-120" y="-18" width="240" height="38" rx="6" fill="#fdf0e6" stroke="#ec7211" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="0" y="6" text-anchor="middle" class="node-title" fill="#ec7211">🚪 Assignment-IGW (Internet Gateway)</text>
+  </g>
+
+  <!-- Flow Users to IGW -->
+  <line x1="480" y1="147" x2="480" y2="175" stroke="#0073bb" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="490" y="165" class="arrow-label">HTTPS (443) / HTTP (80)</text>
+
+  <!-- Custom VPC Boundary -->
+  <rect x="50" y="240" width="1000" height="395" rx="10" fill="#fbfcfd" stroke="#0073bb" stroke-width="2" stroke-dasharray="6,4"/>
+  <rect x="65" y="230" width="210" height="22" rx="4" fill="#0073bb"/>
+  <text x="75" y="245" class="badge">VPC: Assignment-VPC (10.0.0.0/16)</text>
+
+  <!-- ================= TIER 1: PUBLIC WEB TIER ================= -->
+  <rect x="70" y="265" width="285" height="350" rx="8" fill="#f2fcf3" stroke="#2ea44f" stroke-width="1.5"/>
+  <rect x="85" y="256" width="180" height="20" rx="4" fill="#2ea44f"/>
+  <text x="95" y="270" class="badge">Public-Subnet-Web (10.0.1.0/24)</text>
+
+  <!-- Web-Server Box -->
+  <g transform="translate(85, 290)">
+    <rect width="255" height="185" rx="6" fill="#ffffff" stroke="#2ea44f" stroke-width="1.2" filter="url(#shadow)"/>
+    <text x="12" y="22" class="node-title">🖥️ Web-Server (EC2)</text>
+    <line x1="12" y1="30" x2="243" y2="30" stroke="#eaecef" stroke-width="1"/>
+    <text x="12" y="48" class="node-text">• Private IP: <tspan font-weight="bold">10.0.1.246</tspan></text>
+    <text x="12" y="68" class="node-text">• Public IP: <tspan font-weight="bold">54.206.70.148</tspan></text>
+    <text x="12" y="88" class="node-text">• Components: <tspan font-weight="bold">Nginx + React 18 SPA</tspan></text>
+    <text x="12" y="108" class="node-text">• SSL: <tspan font-weight="bold">Self-Signed RSA 2048-bit</tspan></text>
+    <text x="12" y="128" class="node-text">• Security Group: <tspan font-weight="bold">Web-SG</tspan></text>
+    <text x="12" y="148" class="node-text">• Inbound: <tspan fill="#1e8900" font-weight="bold">Ports 80, 443, 22 (0.0.0.0/0)</tspan></text>
+    <rect x="12" y="158" width="230" height="18" rx="3" fill="#e6ffed"/>
+    <text x="18" y="171" font-size="9.5" fill="#155724" font-weight="bold">Upstream Load Balancer (Round-Robin)</text>
+  </g>
+
+  <!-- NAT Gateway Box -->
+  <g transform="translate(85, 490)">
+    <rect width="255" height="110" rx="6" fill="#ffffff" stroke="#545b64" stroke-width="1.2" filter="url(#shadow)"/>
+    <text x="12" y="22" class="node-title">⚡ Assignment-NAT (NAT Gateway)</text>
+    <line x1="12" y1="30" x2="243" y2="30" stroke="#eaecef" stroke-width="1"/>
+    <text x="12" y="48" class="node-text">• Private IP: <tspan font-weight="bold">10.0.1.118</tspan></text>
+    <text x="12" y="68" class="node-text">• Elastic IP: <tspan font-weight="bold">13.238.213.222</tspan></text>
+    <text x="12" y="90" class="node-text">• Purpose: <tspan font-style="italic">Outbound Internet for Private Tiers</tspan></text>
+  </g>
+
+  <!-- IGW to Web-Server Flow -->
+  <path d="M 400 215 L 212 215 L 212 288" fill="none" stroke="#0073bb" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ================= TIER 2: PRIVATE APPLICATION TIER ================= -->
+  <rect x="385" y="265" width="310" height="350" rx="8" fill="#f9f5ff" stroke="#8c3ae2" stroke-width="1.5"/>
+  <rect x="400" y="256" width="210" height="20" rx="4" fill="#8c3ae2"/>
+  <text x="410" y="270" class="badge">Private-Subnet-Backend (10.0.2.0/24)</text>
+
+  <!-- Backend-Server Box -->
+  <g transform="translate(400, 290)">
+    <rect width="280" height="235" rx="6" fill="#ffffff" stroke="#8c3ae2" stroke-width="1.2" filter="url(#shadow)"/>
+    <text x="12" y="22" class="node-title">⚙️ Backend-Server (EC2)</text>
+    <line x1="12" y1="30" x2="268" y2="30" stroke="#eaecef" stroke-width="1"/>
+    <text x="12" y="48" class="node-text">• Private IP: <tspan font-weight="bold">10.0.2.108</tspan> (No Public IP)</text>
+    <text x="12" y="68" class="node-text">• Stack: <tspan font-weight="bold">Node.js 20 LTS + Express.js</tspan></text>
+    <text x="12" y="88" class="node-text">• Process Manager: <tspan font-weight="bold">PM2 (Systemd Service)</tspan></text>
+    <text x="12" y="108" class="node-text">• App 1: <tspan font-weight="bold" fill="#8c3ae2">Port 5000 (online)</tspan></text>
+    <text x="12" y="128" class="node-text">• App 2: <tspan font-weight="bold" fill="#8c3ae2">Port 5001 (online - Bonus 1)</tspan></text>
+    <text x="12" y="148" class="node-text">• Security Group: <tspan font-weight="bold">Backend-SG</tspan></text>
+    <text x="12" y="168" class="node-text">• Inbound Rule: <tspan fill="#8c3ae2" font-weight="bold">5000-5001 strictly from Web-SG</tspan></text>
+    <rect x="12" y="180" width="256" height="42" rx="3" fill="#f3e8ff"/>
+    <text x="18" y="196" font-size="10" fill="#581c87" font-weight="bold">IAM Role: EC2-SSM-Role</text>
+    <text x="18" y="212" font-size="9" fill="#581c87">AWS Systems Manager Session Manager</text>
+  </g>
+
+  <!-- Flow Web-Server to Backend-Server -->
+  <path d="M 340 370 L 398 370" fill="none" stroke="#2ea44f" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <text x="345" y="360" font-size="9.5" font-weight="bold" fill="#2ea44f">Reverse Proxy</text>
+  <text x="343" y="385" font-size="9" fill="#2ea44f">:5000, 5001</text>
+
+  <!-- ================= TIER 3: PRIVATE DATABASE TIER ================= -->
+  <rect x="725" y="265" width="305" height="350" rx="8" fill="#f0f7ff" stroke="#0073bb" stroke-width="1.5"/>
+  <rect x="740" y="256" width="190" height="20" rx="4" fill="#0073bb"/>
+  <text x="750" y="270" class="badge">Private-Subnet-DB (10.0.3.0/24)</text>
+
+  <!-- DB-Server Box -->
+  <g transform="translate(740, 290)">
+    <rect width="275" height="235" rx="6" fill="#ffffff" stroke="#0073bb" stroke-width="1.2" filter="url(#shadow)"/>
+    <text x="12" y="22" class="node-title">🗄️ DB-Server (EC2)</text>
+    <line x1="12" y1="30" x2="263" y2="30" stroke="#eaecef" stroke-width="1"/>
+    <text x="12" y="48" class="node-text">• Private IP: <tspan font-weight="bold">10.0.3.184</tspan> (No Public IP)</text>
+    <text x="12" y="68" class="node-text">• Database Engine: <tspan font-weight="bold">PostgreSQL 18</tspan></text>
+    <text x="12" y="88" class="node-text">• Database Name: <tspan font-weight="bold">bmidb</tspan> | User: <tspan font-weight="bold">bmi_user</tspan></text>
+    <text x="12" y="108" class="node-text">• Target Table: <tspan font-weight="bold">measurements (Indexed)</tspan></text>
+    <text x="12" y="128" class="node-text">• Listening Port: <tspan font-weight="bold" fill="#0073bb">5432</tspan></text>
+    <text x="12" y="148" class="node-text">• Security Group: <tspan font-weight="bold">DB-SG</tspan></text>
+    <text x="12" y="168" class="node-text">• Inbound Rule: <tspan fill="#0073bb" font-weight="bold">Port 5432 strictly from Backend-SG</tspan></text>
+    <rect x="12" y="180" width="251" height="42" rx="3" fill="#e0f2fe"/>
+    <text x="18" y="196" font-size="10" fill="#0369a1" font-weight="bold">IAM Role: EC2-SSM-Role</text>
+    <text x="18" y="212" font-size="9" fill="#0369a1">Remote Access: 10.0.2.0/24 (pg_hba.conf)</text>
+  </g>
+
+  <!-- Flow Backend-Server to DB-Server -->
+  <path d="M 680 370 L 738 370" fill="none" stroke="#8c3ae2" stroke-width="2.5" marker-end="url(#arrow-purple)"/>
+  <text x="686" y="360" font-size="9.5" font-weight="bold" fill="#8c3ae2">PostgreSQL</text>
+  <text x="693" y="385" font-size="9" fill="#8c3ae2">:5432</text>
+
+  <!-- Outbound NAT Flow Lines (Dashed Gray) -->
+  <path d="M 540 525 L 540 550 L 342 550" fill="none" stroke="#545b64" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-gray)"/>
+  <path d="M 875 525 L 875 570 L 342 570" fill="none" stroke="#545b64" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-gray)"/>
+  <text x="560" y="565" font-size="9" fill="#545b64" font-style="italic">Outbound updates via NAT Gateway</text>
+
+  <!-- NAT to IGW -->
+  <path d="M 85 530 L 60 530 L 60 200 L 358 200" fill="none" stroke="#ec7211" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+</svg>
