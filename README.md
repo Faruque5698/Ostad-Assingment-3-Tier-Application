@@ -49,16 +49,4 @@ All three subnets are successfully created and in the `Available` state.
 
 ![Subnets Created Details](Screenshot/Subnets/2.png)
 
----
 
-### ⏳ Upcoming Steps (Work in Progress)
-- [x] **VPC:** Custom VPC created (`10.0.0.0/16`).
-- [x] **Subnets:** Public (Web) and Private (Backend & DB) subnets configured.
-- [ ] **Internet & NAT Gateways:** Attach an Internet Gateway for public traffic and provision a NAT Gateway for outbound private traffic.
-- [ ] **Route Tables:** Configure separate routing for public and private subnets.
-- [ ] **Security Groups:** Enforce tier-to-tier isolation (Internet -> Web SG -> App SG -> DB SG).
-- [ ] **EC2 Provisioning & Deployment:**
-  - Web Tier: Nginx reverse proxy & frontend
-  - App Tier: Backend API service
-  - DB Tier: Database setup & persistence
-- [ ] **Testing & Verification:** Browser verification of the functional application.
